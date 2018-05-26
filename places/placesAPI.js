@@ -1,6 +1,6 @@
-const express = require('express');
-const router = express.Router();
-const places = require('./placesController');
-router.route('/').get(places.getPlace);
+const express = require('express')
+const router = express.Router()
+const places = require('./placesController')
+router.route('/').get(places.getPlace)
 
-module.exports.router = router;
+module.exports.router = router
