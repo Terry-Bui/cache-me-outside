@@ -4,6 +4,6 @@ let googleMapsClient = require('@google/maps').createClient({
   Promise: Promise
 })
 
-module.exports.get = function get (key) {
+module.exports.get = (key) => {
   return googleMapsClient.places({query: key}).asPromise()
 }

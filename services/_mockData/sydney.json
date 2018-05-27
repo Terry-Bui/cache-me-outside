@@ -1,0 +1,39 @@
+{
+  "formatted_address": "New South Wales, Australia",
+  "geometry": {
+    "location": {
+      "lat": -33.8688197,
+      "lng": 151.2092955
+    },
+    "viewport": {
+      "northeast": {
+        "lat": -33.5781409,
+        "lng": 151.3430209
+      },
+      "southwest": {
+        "lat": -34.118347,
+        "lng": 150.5209286
+      }
+    }
+  },
+  "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png",
+  "id": "044785c67d3ee62545861361f8173af6c02f4fae",
+  "name": "Sydney",
+  "photos": [
+    {
+      "height": 1200,
+      "html_attributions": [
+        "<a href=\"https://maps.google.com/maps/contrib/107074428360569736660/photos\">DANJIN THOMAS</a>"
+      ],
+      "photo_reference": "CmRaAAAAsYcVzGLY5Rpjd_5rF0Qa6CXWQkYZCbJepmlfZ4W5u01oDGbpPCcYerhdnvPqg_ODoytTOf05ZEjIs8JsUIlHeDwWPxpslN18u5EcPQUrebx0r9CDDkNTYj6SGQdUSZ2NEhDMNgEN5bH8NEvt5ZTe7aeoGhR8-BVgOxDJDEUMy-yMXfevESOgtQ",
+      "width": 1920
+    }
+  ],
+  "place_id": "ChIJP3Sa8ziYEmsRUKgyFmh9AQM",
+  "reference": "CmRbAAAAVHA5HcM1kNDDM8MnmA6OmP2FwaWUODBs4b5vRGGK2YNvKlPkgURpXzSZMMYU6j9-Q6c3jRZsViSO_yOwWrsU_Xwc7wHuERI1ex9JT7pwabbOHkPhBGIN-qMVcuYevOy2EhBg9NgYl1tHt2xiq0mwicjxGhQZqGiwZMWVBuCboT9N7AvpnG227g",
+  "types": [
+    "colloquial_area",
+    "locality",
+    "political"
+  ]
+}

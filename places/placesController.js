@@ -5,22 +5,17 @@ module.exports.getPlace = async (req, res) => {
   let query = req.query.q
   console.log(`Query: ${query}`)
   if (!query) {
-    console.log('No query')
-    res.status(404).end()
+    console.warn('Empty query')
+    res.send()
   } else {
     query = query.trim().toLowerCase()
     let result = await redis.get(query)
     if (!result) {
       const placeResult = await places.get(query)
       result = JSON.stringify(placeResult.json.results)
-      try {
-        const status = await redis.setExpr30(query, result)
-        console.log(`status: ${status}`)
-      } catch (err) {
-        console.log(err)
-      }
-      console.log(`result is ${result}`)
+      await redis.setExpr30(query, result)
     }
-    res.json(result)
+    console.log(`result: ${result}`)
+    res.status(200).json(result)
   }
 }
