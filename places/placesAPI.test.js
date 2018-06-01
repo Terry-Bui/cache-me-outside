@@ -1,20 +1,52 @@
 /* eslint-env jest */
+import place from './../services/google-places'
+
+const client = require('./../services/redis')
+const nock = require('nock')
+const fse = require('fs-extra')
 const request = require('supertest')
 const app = require('./../app')
-describe('Test the root path', () => {
-  test('GET method respond with 200 status code', async () => {
-    return request(app).get('/').expect(200)
-  })
 
-  test('Calling with Sydney as query will return truthy value', async () => {
+jest.mock('./../services/google-places')
+
+describe('Test the root path', () => {
+  beforeEach(async () => {
+    nock.disableNetConnect()
+    nock.enableNetConnect('127.0.0.1')
+    const p = '__mockData__/sydney.json'
+    const packageObj = await fse.readJson(p)
+    nock('http://127.0.0.1:3000').get('/?q=Sydney').reply(200, packageObj)
+  })
+  afterEach(() => {
+    nock.cleanAll()
+    nock.enableNetConnect()
+  })
+  test('GET method respond with 200 status code', async () => {
+    expect.assertions(1)
+    const response = await request(app).get('/')
+    expect(response.statusCode).toBe(200)
+  })
+  test('Return result for Sydney as query', async () => {
+    expect.assertions(7)
+    // First delete key from Redis if required
+    let deleteData = await client.del('Sydney'.trim().toLowerCase())
+    expect(deleteData).toBeDefined()
+    // Read json result for Sydney
+    const p = '__mockData__/sydney.json'
+    const packageObj = await fse.readJson(p)
+    // Mock function that calls Google Place API
+    place.get.mockResolvedValue({json: {results: packageObj}})
+
     const response = await request(app).get('/?q=Sydney')
-    const responseTextJSON = JSON.stringify(response.text)
-    console.log(responseTextJSON)
-    expect(typeof (responseTextJSON)).toBe('string')
-    expect(responseTextJSON).toBeTruthy()
-    // expect.assertions(1)
-    // const response = await request(app).get('/?q=Sydney')
-    // expect(response.statusCode).toBe(200)
-    // console.log(`resp: ${JSON.stringify(response.text)}`)
+    expect(response).toBeDefined()
+
+    const responseBodyJSON = JSON.parse(response.body)
+
+    expect(responseBodyJSON).toHaveProperty('id')
+    expect(typeof (responseBodyJSON.id)).toBe('string')
+    expect(responseBodyJSON.id).toBe('044785c67d3ee62545861361f8173af6c02f4fae')
+
+    expect(place.get).toHaveBeenCalledTimes(1)
+    expect(place.get).toBeCalledWith('Sydney'.trim().toLowerCase())
   })
 })
