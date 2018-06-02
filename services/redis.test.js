@@ -1,7 +1,7 @@
 /* eslint-env jest */
 
 const redis = require('./redis')
-
+jest.mock('./redis')
 test('Can add into Redis', async () => {
   expect.assertions(2)
   const data = await redis.setExpr30('a', 'b')

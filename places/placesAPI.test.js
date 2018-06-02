@@ -8,7 +8,7 @@ const request = require('supertest')
 const app = require('./../app')
 
 jest.mock('./../services/google-places')
-
+jest.mock('./../services/redis')
 describe('Test the root path', () => {
   beforeEach(async () => {
     nock.disableNetConnect()
@@ -35,7 +35,7 @@ describe('Test the root path', () => {
     const p = '__mockData__/sydney.json'
     const packageObj = await fse.readJson(p)
     // Mock function that calls Google Place API
-    place.get.mockResolvedValue({json: {results: packageObj}})
+    place.get.mockResolvedValue({}).mockResolvedValueOnce({json: {results: packageObj}})
 
     const response = await request(app).get('/?q=Sydney')
     expect(response).toBeDefined()

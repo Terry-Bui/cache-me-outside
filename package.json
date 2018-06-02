@@ -31,6 +31,7 @@
     "nock": "^9.2.6",
     "node-mocks-http": "^1.7.0",
     "nodemon": "^1.17.4",
+    "redis-mock": "^0.24.0",
     "regenerator-runtime": "^0.11.1",
     "standard": "^11.0.1",
     "superagent": "^3.8.3",
