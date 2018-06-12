@@ -11,6 +11,7 @@ module.exports.getPlace = async (req, res) => {
     query = query.trim().toLowerCase()
     let result = await redis.get(query)
     if (!result) {
+      console.log(`No cache for ${query}`)
       const placeResult = await places.get(query)
       result = JSON.stringify(placeResult.json.results)
       await redis.setExpr30(query, result)
