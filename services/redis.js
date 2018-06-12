@@ -1,7 +1,7 @@
 const redis = require('redis')
 const client = redis.createClient({
-      host: process.env.REDIS_HOST
-    })
+  host: process.env.REDIS_HOST
+})
 
 const {promisify} = require('util')
 const getAsync = promisify(client.get).bind(client)
