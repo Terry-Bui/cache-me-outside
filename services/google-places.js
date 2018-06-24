@@ -1,4 +1,3 @@
-require('dotenv').config()
 let googleMapsClient = require('@google/maps').createClient({
   key: process.env.PLACE_API,
   Promise: Promise
