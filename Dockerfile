@@ -1,14 +1,13 @@
 # specify the node base image with your desired version node:<version>
-FROM node:8
+FROM node:8-alpine
 
-# Copy source code
-COPY . /app
 
-# Change working directory
-WORKDIR /app
-
+COPY package*.json ./
+COPY yarn.lock ./
 # Install dependencies
-RUN yarn install
+RUN yarn install --production true
+
+COPY . .
 
 # Application's default port
 EXPOSE 3000
