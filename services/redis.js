@@ -15,7 +15,7 @@ module.exports.get = async (key) => {
 }
 
 module.exports.setExpr30 = async (key, val) => {
-  return setAsync(key.trim().toLowerCase(), val, 'EX', expiryTime)
+  return setAsync(key.trim().toLowerCase(), val.toString(), 'EX', expiryTime)
 }
 
 module.exports.del = async (key) => {
