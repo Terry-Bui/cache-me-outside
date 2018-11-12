@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www --exec babel-node",
-    "run": "node ./bin/www",
+    "nodemon": "nodemon ./bin/www --exec babel-node",
+    "start": "node ./bin/www",
     "test": "standard && jest --coverage",
     "coverage": "jest --collectCoverageFrom=bin/**.js --coverage bin",
     "fix": "standard --fix"
