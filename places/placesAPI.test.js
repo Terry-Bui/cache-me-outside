@@ -27,7 +27,7 @@ describe('Test the root path', () => {
     expect(response.statusCode).toBe(200)
   })
   test('Return result for Sydney as query', async () => {
-    expect.assertions(7)
+    expect.assertions(8)
     // First delete key from Redis if required
     let deleteData = await client.del('Sydney'.trim().toLowerCase())
     expect(deleteData).toBeDefined()
@@ -40,11 +40,12 @@ describe('Test the root path', () => {
     const response = await request(app).get('/?q=Sydney')
     expect(response).toBeDefined()
 
-    const responseBodyJSON = JSON.parse(response.body)
+    const responseBody = response.body
 
-    expect(responseBodyJSON).toHaveProperty('id')
-    expect(typeof (responseBodyJSON.id)).toBe('string')
-    expect(responseBodyJSON.id).toBe('044785c67d3ee62545861361f8173af6c02f4fae')
+    expect(responseBody).toHaveProperty('id')
+    expect(typeof responseBody).toBe('object')
+    expect(typeof (responseBody.id)).toBe('string')
+    expect(responseBody.id).toBe('044785c67d3ee62545861361f8173af6c02f4fae')
 
     expect(place.get).toHaveBeenCalledTimes(1)
     expect(place.get).toBeCalledWith('Sydney'.trim().toLowerCase())

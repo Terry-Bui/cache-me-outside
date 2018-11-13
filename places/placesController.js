@@ -17,6 +17,6 @@ module.exports.getPlace = async (req, res) => {
       await redis.setExpr30(query, result)
     }
     console.log(`result: ${result}`)
-    res.status(200).json(result)
+    res.status(200).json(JSON.parse(result))
   }
 }
